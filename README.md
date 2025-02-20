@@ -1,1 +1,2 @@
 # Entregable2-Geronimo-Borroni
+Este proyecto es un simulador de un catalogo para una inmobiliaria. Incluye una lista de propiedades y un buscador que filtra por nombre o ubicacion. Ademas, tiene un formulario donde el usuario puede cargar una nueva propiedad, con su respectivo nombre, barrio, precio e imagen y esta informacion se almacena en el LocalStorage, permitiendo que se mantenga guardada incluso despues de recargar la pagina.
