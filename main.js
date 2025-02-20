@@ -1,3 +1,4 @@
+
 function Propiedad(nombre, precio, ubicacion, imagen) {
   this.nombre = nombre;
   this.precio = precio;
@@ -42,6 +43,7 @@ const propiedades = [
 const listaPropiedades = document.getElementById("lista-propiedades");
 const buscarInput = document.getElementById("buscar");
 
+//funcion para mostrar los inmuebles y filtrarlos 
 function mostrarPropiedades(filtro = "") {
   listaPropiedades.innerHTML =
     propiedades
@@ -85,6 +87,7 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
+//Obtiene los datos ingresados por el usuario y los almacena usando la funcion constructora
     const nombre = document.getElementById("nombre").value;
     const precio = parseFloat(document.getElementById("precio").value);
     const ubicacion = document.getElementById("ubicacion").value;
