@@ -19,7 +19,25 @@
     <main class="container my-4">
         <section id="lista-propiedades" class="row"></section>
     </main>
-    
+
+    <section id="calculadora" class="container my-5">
+        <div class="card shadow p-4">
+            <h2 class="text-center mb-4">Calcule el valor de su casa, al precio del dolar blue del momento</h2>
+        
+            <div class="row g-2">
+                <div class="col-md-5">
+                    <input type="number" id="monto" class="form-control" placeholder="Ingrese monto en pesos">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100" onclick="convertirPesosADolares()">Cotizar</button>
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <p id="resultado" class="mb-0 text-success fw-bold"></p>
+                </div>
+            </div>
+        </div>
+
+    </section>
     <footer class="bg-dark text-white text-center p-4 mt-4">
         <h2>Añadir nueva propiedad</h2>
         <p>Escriba los datos de la propiedad que desea incluir en el catalogo de ventas</p>
@@ -38,7 +56,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="imagen" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" id="imagen" accept="image/*" required>
+                    <input type="text" class="form-control" id="imagen" placeholder="url de imagen" required>
                 </div>
                 
                 <div class="col-12">
@@ -46,8 +64,9 @@
                 </div>
             </form>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+[
+    {
+      "nombre": "Casa Barrio Los Perales",
+      "precio": 120000,
+      "ubicacion": "B. Los Perales",
+      "imagen": "imagenes/casa4.jpg"
+    },
+    {
+      "nombre": "Departamento en San Pedrito",
+      "precio": 50000,
+      "ubicacion": "San Pedrito",
+      "imagen": "imagenes/depa.jpg"
+    },
+    {
+      "nombre": "Casa Barrio Los Alisos",
+      "precio": 80000,
+      "ubicacion": "San Pedrito",
+      "imagen": "imagenes/casa2.jpg"
+    },
+    {
+      "nombre": "Terreno en Valle Escondido",
+      "precio": 20000,
+      "ubicacion": "Loteo Valle Escondido",
+      "imagen": "imagenes/terreno.jpg"
+    },
+    {
+      "nombre": "Monoambiente",
+      "precio": 50000,
+      "ubicacion": "Centro",
+      "imagen": "imagenes/monoa.jpg"
+    },
+    {
+      "nombre": "Departamento 1 habitación",
+      "precio": 50000,
+      "ubicacion": "B. Moreno",
+      "imagen": "imagenes/mono.jpg"
+    },
+    {
+      "nombre": "Casa con patio",
+      "precio": 95000,
+      "ubicacion": "B. San Martín",
+      "imagen": "imagenes/patio.jpeg"
+    },
+    {
+      "nombre": "Dúplex en zona residencial",
+      "precio": 110000,
+      "ubicacion": "B. Belgrano",
+      "imagen": "imagenes/duplex.jpg"
+    },
+    {
+      "nombre": "Lote en zona comercial",
+      "precio": 45000,
+      "ubicacion": "Av. Principal",
+      "imagen": "imagenes/terreno2.jpg"
+    },
+    {
+      "nombre": "PH con terraza",
+      "precio": 70000,
+      "ubicacion": "B. Norte",
+      "imagen": "imagenes/ph.jpg"
+    }
+  ]
+  

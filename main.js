@@ -1,4 +1,3 @@
-
 function Propiedad(nombre, precio, ubicacion, imagen) {
   this.nombre = nombre;
   this.precio = precio;
@@ -6,44 +5,21 @@ function Propiedad(nombre, precio, ubicacion, imagen) {
   this.imagen = imagen;
 }
 
-const propiedades = [
-  new Propiedad(
-    "Casa Barrio Los Perales",
-    120000,
-    "B. Los Perales",
-    "imagenes/casa4.jpg"
-  ),
-  new Propiedad(
-    "Departamento en San Pedrito",
-    50000,
-    "San Pedrito",
-    "imagenes/depa.jpg"
-  ),
-  new Propiedad(
-    "Casa Barrio Los Alisos",
-    80000,
-    "San Pedrito",
-    "imagenes/casa2.jpg"
-  ),
-  new Propiedad(
-    "Terreno en Valle Escondido",
-    20000,
-    "Loteo Valle Escondido",
-    "imagenes/terreno.jpg"
-  ),
-  new Propiedad("Monoambiente", 50000, "Centro", "imagenes/monoa.jpg"),
-  new Propiedad(
-    "Departamento 1 habitacion",
-    50000,
-    "B. Moreno",
-    "imagenes/mono.jpg"
-  ),
-];
+let propiedades = [];
+
+fetch("propiedades.json")
+  .then((response) => response.json())
+  .then((data) => {
+    propiedades = data.map(
+      (prop) => new Propiedad(prop.nombre, prop.precio, prop.ubicacion, prop.imagen)
+    );
+    mostrarPropiedades();
+  })
+  .catch((error) => console.error("Error cargando las propiedades:", error));
 
 const listaPropiedades = document.getElementById("lista-propiedades");
 const buscarInput = document.getElementById("buscar");
 
-//funcion para mostrar los inmuebles y filtrarlos 
 function mostrarPropiedades(filtro = "") {
   listaPropiedades.innerHTML =
     propiedades
@@ -69,36 +45,66 @@ function mostrarPropiedades(filtro = "") {
       .join("") ||
     `<p class="text-center">No se encontró ninguna propiedad, pruebe con otras palabras</p>`;
 }
-function agregarPropiedad(nombre, precio, ubicacion) {
-  const nuevaPropiedad = new Propiedad(
-    nombre,
-    precio,
-    ubicacion,
-    "imagenes/default.jpg"
-  );
 
+function agregarPropiedad(nombre, precio, ubicacion, imagen = "imagenes/default.avif") {
+  const nuevaPropiedad = new Propiedad(nombre, precio, ubicacion, imagen);
   propiedades.push(nuevaPropiedad);
-
   localStorage.setItem("propiedades", JSON.stringify(propiedades));
+  mostrarPropiedades();
 }
 
 document
   .getElementById("form-agregar")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-
-//Obtiene los datos ingresados por el usuario y los almacena usando la funcion constructora
+    
     const nombre = document.getElementById("nombre").value;
     const precio = parseFloat(document.getElementById("precio").value);
     const ubicacion = document.getElementById("ubicacion").value;
-    const imagen = document.getElementById("imagen").value;
+    const imagen = document.getElementById("imagen").value || "imagenes/default.jpg";
 
     agregarPropiedad(nombre, precio, ubicacion, imagen);
 
     this.reset();
   });
+  
 
-buscarInput.addEventListener("input", () =>
-  mostrarPropiedades(buscarInput.value)
-);
-mostrarPropiedades();
+buscarInput.addEventListener("input", () => mostrarPropiedades(buscarInput.value));
+
+
+//Convertidor de pesos a dolar blue
+async function obtenerCotizacion() {
+  try {
+      const respuesta = await fetch("https://dolarapi.com/v1/dolares/blue");
+      const datos = await respuesta.json();
+      return datos.venta; 
+  } catch (error) {
+      console.error("Error obteniendo la cotización:", error);
+      return null;
+  }
+}
+
+async function convertirPesosADolares() {
+  const montoPesos = parseFloat(document.getElementById("monto").value);
+  if (isNaN(montoPesos) || montoPesos <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Ingrese un monto valido en pesos',
+        icon: 'warning'
+      });
+      return;
+  }
+
+  const cotizacion = await obtenerCotizacion();
+  if (!cotizacion) {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudo obtener la cotización del dólar',
+        icon: 'error'
+      });
+      return;
+  }
+
+  const montoDolares = montoPesos / cotizacion;
+  document.getElementById("resultado").textContent = `Equivale a: $${montoDolares.toFixed(2)} USD`;
+}
